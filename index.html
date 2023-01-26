@@ -1,0 +1,360 @@
+
+<HTML>
+<HEAD>
+<TITLE>Mots à rayer By Corsica </TITLE>
+<style> 
+.used { color:Gray; }
+html, body  {
+		padding:0px;
+		margin:10px 10px 10px 10px;
+		font-family:"Trebuchet MS", Arial, sans-serif;
+		font-size:11px;
+		color:blue ; 
+		background: gray;
+		text-align:center;	
+  		}
+div.titre   {
+		padding:0px;
+		margin:0px 0px 0px 0px;
+		font-family:"Trebuchet MS", Arial, sans-serif;
+		font-size:16px;
+		color:blue ; 
+		text-align:center;
+		background: white;
+		border: double 2 2 2 2 blue;
+		width:80%;
+		vertical-align: middle;
+  		}
+table.lettres {
+		background-color:white;
+		border:dotted 1 1 1 1;
+		text-align:center; 
+		vertical-align:middle;
+		}
+table.fleches {
+		background-color:white;
+		border:dotted 1 1 1 1;
+		text-align:center;
+		vertical-align:middle; 
+		font-family:"Wingdings";
+		width:100%;
+		}
+table.mots	{
+		background-color:white;
+		border:dotted 1 1 1 1;
+		width:100px;
+		text-align:left; 
+		vertical-align:top;	
+		}
+table.mots	{
+		background-color:white;
+		border:dotted 1 1 1 1;
+		width:100px;
+		text-align:left; 
+		vertical-align:top;	
+		}
+td.divMot  {
+		font-family:"Trebuchet MS", Arial, sans-serif;
+		font-size:14px;
+		width:200px;
+		}
+td.divDir  {
+		font-family:"Wingdings";
+		font-size:14px;
+		width:200px;
+		}
+td.divOKKO	{
+		font-family:"Wingdings";
+		font-size:32pt;
+		text-align:center;
+		width:50px;
+		}
+a.lettres 		{ text-decoration:none; width:100% ; color: blue}
+a.lettres:visited { }
+a.lettres:hover 	{ font-size:14px; border:solid 1px ; background-color : white ; color: red ; }
+a.lettres:active 	{ }
+a 		{ text-decoration:none; width:100% ; color: blue}
+a:visited 	{ }
+a:hover 	{ background-color : blue ; color: white }
+a:active 	{ }
+td.fleche   { text-align:center; vertical-align:middle; font-family:"Wingdings" }
+td.ct		{ text-align:center; vertical-align:top;		}
+td.cm		{ text-align:center; vertical-align:middle;	}
+td.lt		{ text-align:left; vertical-align:top;		}
+td.lm		{ text-align:left; vertical-align:middle;	}
+td.rt		{ text-align:right; vertical-align:top;		}
+td.rm		{ text-align:right; vertical-align:middle;	}
+</style>
+<script>
+Cols = 15;
+Rows = 15;
+var selMot;
+var selDir;
+var selOKKO;
+var jsMot = "";
+var jsDir = "";
+var txtDir = "";
+var txtMot = "";
+var Ok = false;
+var tabToGray = new Array();
+var iToGray = 0;
+tabData = new Array( Rows );
+
+tabChaine = "uessetlaceercas" +
+		"ainfanteihadech" +
+		"epslccrhtvaniea" +
+		"deiihoceesittth" +
+		"nscaarunueeserc" +
+		"aerialerrqijoas" +
+		"bttnrmaetmiyadu" +
+		"erotetnpiiadime" +
+		"nmeneeatelsabne" +
+		"ibtgguiritdanac" +
+		"hsluegqseeronpn" +
+		"piseenmimproati" +
+		"urrluetetumgnor" +
+		"aeelbonsoeeirep" +
+		"delliatctolemac"	;
+
+var tabMots = new Array();
+var iMots = 0;
+tabMots[ iMots++ ] = "abdiquer"; 
+tabMots[ iMots++ ] = "altesse"; 
+tabMots[ iMots++ ] = "avenement"; 
+tabMots[ iMots++ ] = "bandeau"; 
+tabMots[ iMots++ ] = "bleu"; 
+tabMots[ iMots++ ] = "camelot"; 
+tabMots[ iMots++ ] = "charte"; 
+tabMots[ iMots++ ] = "chateau"; 
+tabMots[ iMots++ ] = "couronne"; 
+tabMots[ iMots++ ] = "courtisan"; 
+tabMots[ iMots++ ] = "dauphin"; 
+tabMots[ iMots++ ] = "diademe"; 
+tabMots[ iMots++ ] = "edit"; 
+tabMots[ iMots++ ] = "etiquette"; 
+tabMots[ iMots++ ] = "imperatrice"; 
+tabMots[ iMots++ ] = "infant"; 
+tabMots[ iMots++ ] = "legitimiste"; 
+tabMots[ iMots++ ] = "lis"; 
+tabMots[ iMots++ ] = "majeste"; 
+tabMots[ iMots++ ] = "monarchie"; 
+tabMots[ iMots++ ] = "negus"; 
+tabMots[ iMots++ ] = "noble"; 
+tabMots[ iMots++ ] = "page"; 
+tabMots[ iMots++ ] = "palais"; 
+tabMots[ iMots++ ] = "prince"; 
+tabMots[ iMots++ ] = "regent"; 
+tabMots[ iMots++ ] = "reine"; 
+tabMots[ iMots++ ] = "roi"; 
+tabMots[ iMots++ ] = "royalisme"; 
+tabMots[ iMots++ ] = "sacre"; 
+tabMots[ iMots++ ] = "schah"; 
+tabMots[ iMots++ ] = "sire"; 
+tabMots[ iMots++ ] = "taille"; 
+tabMots[ iMots++ ] = "tole"; 
+tabMots[ iMots++ ] = "trone"; 
+
+// 10
+for 	( var  r = 0 ; r < Rows ; r++ )
+    	{
+      var tempRow = new Array( Cols );
+	for 	( var c = 0 ; c < Cols ; c++ )
+    		{
+		tempRow[ c ] = tabChaine.substring( ( r * Cols ) + c , ( r * Cols ) + c + 1) ;
+		}
+	tabData[ r ] = tempRow;
+	}		
+
+function initTab()
+{
+	//
+	// Génération du tableau de lettres
+	//
+	var myObj = document.getElementById("myHTMLTab");
+	var myTmpHTML = "";
+	myTmpHTML += "<table class=\"lettres\" >";
+	for 	( var  r = 0 ; r < Rows ; r++ )
+    	{
+		myTmpHTML += "<tr>";
+      	var tempRow = new Array( Rows );
+		tempRow = tabData[ r ] ;
+		for 	( var c = 0 ; c < Cols ; c++ )
+    			{
+			myTmpHTML += "<td width=\"20px\">";
+			MyCoord = "R" + ( r < 10 ? "0" + r : r ) + "C" + ( c < 10 ? "0" + c : c ) ;
+			myTmpHTML += "<a href=\"javascript:setLettre('" + MyCoord + "');\" id=\"" + MyCoord + "\">" + tempRow[ c ] + "</a>";
+			myTmpHTML += "</td>";
+			}
+		myTmpHTML += "</tr>";
+	}
+	myTmpHTML += "</table>";
+	myObj.innerHTML = myTmpHTML; 	
+
+	//
+	// Génération du tableau des mots
+	//
+	var myObj = document.getElementById("myHTMLMot");
+	myTmpHTML = "<table class=\"mots\">";
+	myTmpHTML += "<tr>";
+	iMots--;
+	nbTab = (( iMots - ( iMots % Rows )) / Rows ) + 1;
+	for 	( var  m = 0 ; m < nbTab ; m++ )
+    	{
+		myTmpHTML += "<td valign=\"top\">";
+		myTmpHTML += "<table class=\"mots\">";
+		var Init = ( m * Rows ) ;
+		var Max = (( m + 1 ) * Rows );
+		for 	( var  mm = Init ; mm < ( Max > iMots ? iMots + 1 : Max ) ; mm++ )
+    		{
+		myTmpHTML += "<tr>";
+		myTmpHTML += "<td>";
+		myTmpHTML += "<a href=\"javascript:setMot('" + tabMots[ mm ] + "');\" id=\""+ tabMots[mm] + "\">&nbsp;" + tabMots[ mm ] + "</a>";
+		myTmpHTML += "</td>";
+		myTmpHTML += "</tr>";
+		}
+		myTmpHTML += "</table>";
+		myTmpHTML += "</td>";
+	}
+	myTmpHTML += "</tr>";
+	myTmpHTML += "</table>";
+	myObj.innerHTML = myTmpHTML; 	
+
+	// Generation du tableau de sélection de direction
+	myObj = document.getElementById("myHTMLDir");
+	myTmpHTML = "<table class=\"fleches\" border=1>" +
+			" <tr>" +
+			"     <td rowspan=\"3\">" +
+			"		<table class=\"statut\">" +
+			" 		  <tr><td id=\"txtMot\" class=\"divMot\"></td>" +
+			"     	      <td id=\"divMot\" class=\"divMot\">&nbsp;</td>" +
+			"     	      <td id=\"divOKKO\" class=\"divOKKO\" rowspan=\"2\"></td></tr>" +
+			"     	  <tr><td id=\"txtDir\" class=\"divMot\"></td>" +
+			"     	      <td id=\"divDir\" >&nbsp;</td></tr>" +
+			"           </table>" +
+			"     </td>" +
+			"     <td><a href=\"javascript:setDir('NO','õ');\" alt=\"Vers le haut à gauche\">õ</a></td>" +
+			"     <td><a href=\"javascript:setDir('N','ñ');\" alt=\"Vers le haut\">ñ</a></td>" +
+			"     <td><a href=\"javascript:setDir('NE','ö');\" alt=\"Vers le haut à droite\">ö</a></td>" +
+			" </tr>" +
+			" <tr><td><a href=\"javascript:setDir('O','ï');\" title=\"Vers la gauche\">ï</a></td>" +
+			"     <td><a href=\"javascript:setDir('C','J');\" title=\"Effacer les sélections\">J</a></td>" +
+			"     <td><a href=\"javascript:setDir('E','ð');\" alt=\"Vers la droite\">ð</a></td></tr>" +
+			" <tr><td><a href=\"javascript:setDir('SO','÷');\" alt=\"Vers le bas à gauche\">÷</a></td>" +
+			"     <td><a href=\"javascript:setDir('S','ò');\" alt=\"Vers le bas\">ò</a></td>" +
+			"     <td><a href=\"javascript:setDir('SE','ø');\" alt=\"Vers le bas à droite\">ø</a></td></tr>" +
+			"</table>";
+	myObj.innerHTML = myTmpHTML;
+
+	// Récupération des objets de sélections de mot et direction
+	selDir = document.getElementById("divDir");
+	selMot = document.getElementById("divMot");
+	selOKKO = document.getElementById("divOKKO");
+	txtMot = document.getElementById("txtMot");
+	txtDir = document.getElementById("txtDir");
+	setDir("C");
+}
+function ctrlOKKO()
+{
+	if ( jsMot == "" || jsDir == "" )
+	{
+	selOKKO.style.color = "red";
+	selOKKO.innerHTML = "û";
+	Ok = false;
+	}
+	else
+	{
+	selOKKO.style.color = "#00ff00";
+	selOKKO.innerHTML = "ü";
+	Ok = true;
+	}
+}
+
+function setDir( Dir , Img )
+{
+	if ( Dir == "C" )
+	{
+	selDir.innerHTML = jsDir = "";
+	selMot.innerHTML = jsMot = "";
+	txtMot.innerHTML = "Choisissez un mot dans la liste";
+	txtDir.innerHTML = "Choisissez un sens de lecture";
+	}
+	else
+	{
+	selDir.innerHTML = Img;
+	txtDir.innerHTML = "Sens de lecture : ";
+	jsDir = Dir;
+	}
+	ctrlOKKO();
+}
+function setMot( Mot )
+{
+	selMot.innerHTML = jsMot = Mot;
+	txtMot.innerHTML = "Mot sélectionné : ";
+	ctrlOKKO();
+
+}
+function setLettre( Lettre )
+{
+	try {
+	myCol = eval(Lettre.substring( 4 , 7 ));
+	myRow = eval(Lettre.substring( 1 , 3 ));
+	myLength = jsMot.length;
+	if ( Ok == false ) return;	myString = "";
+	iToGray = 0;
+	myTmpCol = myCol;
+	myTmpRow = myRow;
+	for 	( var  i = 0 ; i < myLength ; i++ )
+    	{
+      		tempRow = tabData[ myTmpRow ] ;
+		myString += tempRow[ myTmpCol ];
+		tabToGray[ iToGray++ ] = getCoord( myTmpRow , myTmpCol );
+		if ( jsDir == "E" || jsDir == "NE" || jsDir == "SE" )  myTmpCol++;
+		if ( jsDir == "O" || jsDir == "NO" || jsDir == "SO" )  myTmpCol--;
+		if ( jsDir == "N" || jsDir == "NE" || jsDir == "NO" )  myTmpRow--;
+		if ( jsDir == "S" || jsDir == "SE" || jsDir == "SO" )  myTmpRow++;
+	}
+	if ( jsMot != myString ) return;
+	Griser();
+	myTmpObj = document.getElementById(jsMot);
+	myTmpObj.style.color = "black";
+	}
+	catch ( e )
+	{
+	//window.status = e;
+	}
+}
+function set2DEC( Valeur )
+{
+	if ( valeur < 10 ) return "0" + Valeur;
+	else               return Valeur;
+}
+function getCoord( r , c)
+{
+	return "R" + ( r < 10 ? "0" + r : r ) + "C" + ( c < 10 ? "0" + c : c ) ;
+}
+function Griser()
+{
+	for ( var i=0 ; i < iToGray ; i++ )
+	{
+	myTmpObj = document.getElementById(tabToGray[i]);
+	myTmpObj.style.color = "white";
+	myTmpObj.style.backgroundColor = "gray";
+	}
+}
+</script>
+</HEAD>
+<body onLoad="initTab()">
+	<center><div class="titre"><br>Mots à rayer<br>&nbsp;</div><br>
+	<table cellpadding="5px">
+		<tr>
+			<td id="myHTMLTab" class="rt"></td>
+			<td id="myHTMLMot" class="lt"></td>
+		</tr>
+		<tr>
+			<td colspan="2" class="rt" id="myHTMLDir">
+			</td>
+		</tr>
+	</table>
+	</center>
+</body>
+</html>
